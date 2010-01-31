@@ -1,0 +1,114 @@
+body {
+  background-image:url("../images/bg.jpg");
+}
+
+div.box {
+  border: 2px solid;
+  background: white;
+}
+
+div.border {
+  padding-right: 4px;
+  margin-right:  5px;
+  border-right:  1px solid #444444;
+}
+
+div.border_left {
+  padding-left: 4px;
+  margin-left:  5px;
+  border-left:  1px solid #444444;
+}
+
+div.colborder {
+  padding-right: 24px;
+  margin-right:  25px;
+  border-right:  1px solid #444444;
+}
+
+div.fullheight {
+  height: 100%;
+}
+
+#logo {
+  float: left;
+  margin: 1.5em 1.5em 1.5em 0;
+  padding: 0;
+}
+
+div.right {
+  float:  right;
+  margin: 1.5em 0 1.5em 1.5em;
+}
+
+div.header {
+  padding-bottom: 4px;
+  margin-bottom:  5px;
+  border-bottom:  1px solid #444444;
+}
+
+div.footer {
+  padding-top: 4px;
+  margin-top:  5px;
+  border-top:  1px solid #444444;
+}
+
+a:focus, a:hover {
+  color:#ffffff;
+}
+
+a:hover {
+  background-color:#ffffff;
+  color:#000000;
+}
+
+.warn {padding:.8em;margin-bottom:1em;border:2px solid #ddd;}
+.warn {background:#FFF6BF;color:#514721;border-color:#FFD324;}
+.notice {background:#E6EFC2;color:#264409;border-color:#C6D880;}
+.warn a {color:#514721;}
+.notice a {color:#264409;}
+
+
+div.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+} 
+div.menu li {
+  float: left;
+  margin: 0 0.15em;
+} 
+div.menu li a {
+  background: #dddddd bottom left repeat-x;
+  height: 2em;
+  line-height: 2em;
+  float: left;
+  width: 9em;
+  display: block;
+  border: 2px solid black;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+} 
+
+div.boxheader {
+  background: gray bottom left repeat-x;
+  height: 2em;
+  line-height: 2em;
+  float: left;
+  position: relative;
+  top:-2.2em;
+  left: 0.15em;
+  width: 9em;
+  display: block;
+  border: 2px solid black;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
+div.boxcontent {
+  margin-top: 2.6em;
+}
+

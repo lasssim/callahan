@@ -1,0 +1,18 @@
+<div class="boxheader">Editing role</div>
+
+<div class="boxcontent">
+  <% form_for(@role) do |f| %>
+    <%= f.error_messages %>
+
+    <p>
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
+    </p>
+    <p>
+      <%= f.submit "Update" %>
+    </p>
+  <% end %>
+
+  <%= link_to 'Show', @role %> |
+  <%= link_to 'Back', roles_path %>
+</div>

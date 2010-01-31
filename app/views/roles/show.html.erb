@@ -1,0 +1,12 @@
+<div class="boxheader">Role details</div>
+
+<div class="boxcontent">
+  <p>
+    <b>Name:</b>
+    <%=h @role.name %>
+  </p>
+
+
+  <%= link_to 'Edit', edit_role_path(@role) %> |
+  <%= link_to 'Back', roles_path %>
+</div>
