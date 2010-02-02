@@ -9,4 +9,5 @@ tmp/*
 log/*
 private/images/*
 public/cache/*
+public/system/*
 .DS_Store
