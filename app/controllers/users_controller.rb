@@ -9,10 +9,13 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
+    @user.roles = Role.find(:all, :conditions => { :name => "user" })
+    
     if @user.save
       flash[:notice] = "Account registered!"
       #redirect_back_or_default account_url
       redirect_back_or_default user_url(@user)
+      #redirect_to user_url
     else
       render :action => :new
     end

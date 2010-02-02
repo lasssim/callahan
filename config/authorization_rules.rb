@@ -3,7 +3,7 @@ authorization do
     has_permission_on :roles, :to => [:index, :show]
     has_permission_on :users, :to => [:index, :show]
     has_permission_on :users, :to => [:edit, :update] do  
-      if_attribute :user => is { user }  
+      if_attribute :id => is { user.id }  
     end 
   end
 
@@ -12,8 +12,8 @@ authorization do
   end  
 
   role :guest do  
-    has_permission_on :users,         :to => [:new, :index]  
-    has_permission_on :user_sessions, :to => [:new, :index]  
+    has_permission_on :users,         :to => [:new, :index, :create]  
+    has_permission_on :user_sessions, :to => [:new, :index, :create]
   end  
 end
 
