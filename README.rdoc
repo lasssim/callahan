@@ -1,3 +1,6 @@
-This app follows the reset passwords tutorial: [http://www.binarylogic.com/2008/11/16/tutorial-reset-passwords-with-authlogic](http://www.binarylogic.com/2008/11/16/tutorial-reset-passwords-with-authlogic)
+Installation:
 
-For more information on the app itself please see the {master branch}[http://github.com/binarylogic/authlogic_example/tree/master]
+ git clone git@github.com:lister/callahan.git
+ cd callahan
+ rake db:migrate
+ script/server
