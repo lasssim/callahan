@@ -10,6 +10,9 @@ class CreateRoles < ActiveRecord::Migration
       t.references :role, :user
     end
 
+		Role.new(:name => "user").save
+		Role.new(:name => "admin").save
+
   end
 
   def self.down
