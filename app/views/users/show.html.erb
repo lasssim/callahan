@@ -2,6 +2,9 @@
 
 <div class="boxcontent">
 
+
+	<%= image_tag @user.avatar.url(:thumb) %>
+
   <p>
     <b>Login:</b>
     <%=h @user.login %>

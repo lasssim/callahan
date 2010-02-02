@@ -2,13 +2,14 @@
 
 <div class="boxcontent">
 
-  <% semantic_form_for @user, :url => user_path do |f| %>
+  <% semantic_form_for @user, :url => user_path, :html => { :multipart => true } do |f| %>
     <%= render :partial => "form", :object => f, :locals => { :name => "Update"} %>
   <% end %>
 
   <% semantic_form_for @user, :url => user_path do |f| %>
     <%= render :partial => "changepassword", :object => f, :locals => { :name => "Change Password"} %>
   <% end %>
+
 
 
 

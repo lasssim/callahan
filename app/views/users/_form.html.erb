@@ -1,10 +1,11 @@
 
 <% form.inputs :name => name do %>
   <%= form.input :login, :hint => "The name." %>
-  <%= form.input :password              if name == "Register"%>
-  <%= form.input :password_confirmation if name == "Register" %>
   <%= form.input :email %>
-  <%= form.input :roles %>
+  <%= form.input :password              if     name == "Register" %>
+  <%= form.input :password_confirmation if     name == "Register" %>
+	<%= form.input :avatar                unless name == "Register" %>
+  <%= form.input :roles                 unless name == "Register" %>
   <%= form.commit_button name %>
 <% end %>
 

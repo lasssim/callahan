@@ -5,6 +5,7 @@
   <table>
     <thead>
       <tr>
+        <th>Pic</th>
         <th>Login</th>
         <th>Email</th>
         <th>Roles</th>
@@ -15,6 +16,7 @@
     <tbody>
       <% @users.each do |user| %>
         <tr>
+					<td><%= image_tag user.avatar.url(:tiny) %></td>
           <td><%=h user.login %></td>
           <td><%=h user.email %></td>
           <td><%=h user.roles.collect {|r| r.name }.join(", ") %></td>
