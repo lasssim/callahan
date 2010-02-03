@@ -1,51 +1,20 @@
 <div class="boxheader">User details</div>
 
+<div class="right"><%= image_tag @user.avatar.url(:thumb), :class => "right" %></div>
+
+
 <div class="boxcontent">
+	<table class="horizontal">
+		<tr><td class="name">Login            </td> <td class="value"><%= @user.login            %> </td></tr>
+		<tr><td class="name">Email            </td> <td class="value"><%= mail_to @user.email    %> </td></tr>
+		<tr><td class="name">Login count      </td> <td class="value"><%= @user.login_count      %> </td></tr>
+		<tr><td class="name">Last request at  </td> <td class="value"><%= @user.last_request_at  %> </td></tr>
+		<tr><td class="name">Last login at    </td> <td class="value"><%= @user.last_login_at    %> </td></tr>
+		<tr><td class="name">Current login at </td> <td class="value"><%= @user.current_login_at %> </td></tr>
+		<tr><td class="name">Last login ip    </td> <td class="value"><%= @user.last_login_ip    %> </td></tr>
+		<tr><td class="name">Current login ip </td> <td class="value"><%= @user.current_login_ip %> </td></tr>
+	</table>
 
 
-	<%= image_tag @user.avatar.url(:thumb) %>
-
-  <p>
-    <b>Login:</b>
-    <%=h @user.login %>
-  </p>
-
-  <p>
-    <b>Email:</b>
-    <%=h @user.email %>
-  </p>
-
-  <p>
-    <b>Login count:</b>
-    <%=h @user.login_count %>
-  </p>
-
-  <p>
-    <b>Last request at:</b>
-    <%=h @user.last_request_at %>
-  </p>
-
-  <p>
-    <b>Last login at:</b>
-    <%=h @user.last_login_at %>
-  </p>
-
-  <p>
-    <b>Current login at:</b>
-    <%=h @user.current_login_at %>
-  </p>
-
-  <p>
-    <b>Last login ip:</b>
-    <%=h @user.last_login_ip %>
-  </p>
-
-  <p>
-    <b>Current login ip:</b>
-    <%=h @user.current_login_ip %>
-  </p>
-
-
-  <% #link_to 'Edit', edit_account_path %>
   <%= link_to 'Edit', edit_user_path %>
 </div>

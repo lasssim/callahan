@@ -67,6 +67,22 @@ a:hover {
 .warn a {color:#514721;}
 .notice a {color:#264409;}
 
+table.horizontal {
+  border-collapse: collapse;
+  border: none;
+}
+
+table.horizontal td.name {
+  text-align: right;
+	font-weight: bold;
+  border: none;
+  border-right: 1px dashed gray;
+}
+
+table.horizontal td.value {
+  border: none;
+}
+
 
 div.menu ul {
   list-style: none;
@@ -112,3 +128,7 @@ div.boxcontent {
   margin-top: 2.6em;
 }
 
+div.right {
+	float: right;
+	margin: 0;
+}
