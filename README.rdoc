@@ -1,5 +1,5 @@
 Installation:
-
+     
  git clone git@github.com:lister/callahan.git
  cd callahan
  rake db:migrate
