@@ -4,6 +4,7 @@
 class ApplicationController < ActionController::Base
   helper :all
   helper_method :current_user_session, :current_user
+  helper_method :current_user_is_admin?
   filter_parameter_logging :password, :password_confirmation
   before_filter { |c| Authorization.current_user = c.current_user }
  
@@ -43,6 +44,10 @@ class ApplicationController < ActionController::Base
       end
     end
     
+    def current_user_is_admin?
+      not current_user.nil? and not current_user.roles.find(:all, :conditions => { :name => "admin" }).empty?
+    end
+
     def store_location
       session[:return_to] = request.request_uri
     end
