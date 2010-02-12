@@ -106,6 +106,16 @@ div.menu li a {
   text-align: center;
 } 
 
+div.vmenu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+} 
+div.vmenu li {
+  float: left;
+  margin: 0 0.15em;
+} 
+
 div.boxheader {
   background: gray bottom left repeat-x;
   height: 2em;
@@ -114,7 +124,6 @@ div.boxheader {
   position: relative;
   top:-2.2em;
   left: 0.15em;
-  width: 9em;
   display: block;
   border: 2px solid black;
   color: white;
@@ -122,13 +131,51 @@ div.boxheader {
   text-align: center;
   margin-right: 0;
   margin-bottom: 0;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 div.boxcontent {
   margin-top: 2.6em;
+  position: relative;
+  top:-1.6em;
+
 }
 
 div.right {
 	float: right;
 	margin: 0;
 }
+
+td {
+  vertical-align: top;
+}
+
+div.trikot {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+div.trikot_female {
+  width:116px; 
+  height:173px; 
+  background: url(../images/trikot_female.png) white;
+}
+
+div.trikot_male{
+  width:118px; 
+  height:173px; 
+  background: url(../images/trikot_male.png) white;
+}
+
+div.trikot div.number {
+  width:100%; 
+  text-align:center;
+  vertical-align: top;
+  padding-top: 20px;
+  font-weight: bold;
+  font-size: 40px;
+  font-family: comic sans ms;
+}
+
+

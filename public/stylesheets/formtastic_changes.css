@@ -21,3 +21,87 @@ form.formtastic fieldset ol li p.inline-hints {
   color:#333; 
 }
 
+form.formtastic fieldset ol li {
+  margin-bottom:0.5em;
+}
+
+/* NESTED FIELDSETS AND LEGENDS (radio, check boxes and date/time inputs use nested fieldsets)
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset ol li fieldset { position:relative; border: none; padding: 0px;}
+form.formtastic fieldset ol li fieldset legend { position:absolute; display:block; float:left; padding-top:0.2em; width:25%;}
+form.formtastic fieldset ol li fieldset legend span { position:absolute; }
+form.formtastic fieldset ol li fieldset legend.label label { position:absolute; }
+form.formtastic fieldset ol li fieldset ol { float:left; width:74%; margin:0; padding:0 0 0 25%; }
+form.formtastic fieldset ol li fieldset ol li { padding:0; border:0; }
+
+
+form.formtastic fieldset ol li p.inline-hints {
+  color:#999999;
+  margin: 0 0 0.5em 25%;
+}
+
+form.formtastic fieldset ol li label {
+  display:block;
+  float:left;
+  padding-top:0;
+  width:23%;
+  text-align: right;
+  padding-right: 2%;
+  border-right: dashed 1px;
+}
+
+form.formtastic fieldset ol li.string input {
+  width:72%;
+  margin-left: 2%
+}
+
+form.formtastic fieldset ol li.numeric input {
+  width:72%;
+  margin-left: 2%;
+}
+
+form.formtastic fieldset ol li p.inline-hints {
+  color:#999999;
+  margin:0 0 0.5em 27%;
+}
+
+form.formtastic fieldset ol li.radio fieldset ol li label,
+form.formtastic fieldset ol li.check_boxes fieldset ol li label {
+  text-align: left;
+  border: none;
+  font-weight: normal;
+  margin-top: 2px;
+}
+
+form.formtastic fieldset ol li.radio fieldset ol li label input,
+form.formtastic fieldset ol li.check_boxes fieldset ol li label input {
+  margin-right: 0.2em;
+  margin-left: 2%;
+  margin-top: -0.7em;
+}
+
+form.formtastic fieldset ol li.date fieldset ol li, form.formtastic fieldset ol li.time fieldset ol li, form.formtastic fieldset ol li.datetime fieldset ol li {
+  float:left;
+  margin:0 0.3em 0 3%;
+  width:auto;
+}
+
+form.formtastic input, form.formtastic textarea, form.formtastic select {
+  margin-left: 2%;
+}
+
+form.formtastic fieldset ol li fieldset {
+  margin-bottom: 0;
+}
+
+form.formtastic fieldset ol li fieldset legend.label label {
+  font-size: 0.8em;
+}
+
+form.formtastic fieldset ol li.password input {
+  width:72%;
+}
+
+form.formtastic fieldset ol li.boolean label {
+  border: none;
+}
