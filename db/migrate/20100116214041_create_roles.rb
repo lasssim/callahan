@@ -6,17 +6,17 @@ class CreateRoles < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table :roles_users, :id => false do |t|
+    create_table :roleuser_associations, :id => false do |t|
       t.references :role, :user
     end
 
-		Role.new(:name => "user").save
-		Role.new(:name => "admin").save
+	Role.new(:name => "admin").save
+	Role.new(:name => "user").save
 
   end
 
   def self.down
     drop_table :roles
-    drop_table :roles_users
+    drop_table :roleuser_associations
   end
 end
