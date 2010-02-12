@@ -1,12 +1,86 @@
 
-<% form.inputs :name => name do %>
-  <%= form.input :login, :hint => "The name." %>
-  <%= form.input :email %>
-  <%= form.input :password              if     name == "Register" %>
-  <%= form.input :password_confirmation if     name == "Register" %>
-	<%= form.input :avatar                unless name == "Register" %>
-  <%= form.input :roles                 unless name == "Register" %>
-  <%= form.commit_button name %>
+<%= javascript_include_tag "jscolor/jscolor" %>
+
+<% if permitted_to? :update, current_user.roleuser_associations %>
+  <% form.inputs :name => "Administrative Options" do %>
+    <table>
+      <tr>
+        <td width="50%">
+          <%= form.input :roles, :as => :check_boxes %>
+        </td>
+        <td width="50%">
+        </td>
+      </tr>
+    </table>
+    <%= form.commit_button "Update" %>
+  <% end %>
+<% end %>
+
+
+<% form.inputs :name => "Personal Details" do %>
+  <table>
+    <tr>
+      
+      <td width="50%">
+        <%= form.input :login %>
+        <%= form.input :email,    :label => image_tag("email.gif") %>
+        <%= form.input :homepage, :label => image_tag("www.png") %>
+        <%= form.input :forename %>
+        <%= form.input :surname %>
+        <%= form.input :hometown %>
+        <%= form.input :veggie, :as => :radio, 
+                                :label => "Veggie" %>
+
+        <%= form.input :female, :as         => :radio, 
+                                :label      => "Gender", 
+                                :collection => [["Male", false], ["Female", true]], 
+                                :input_html => { :onchange => "document.getElementById('trikot_#{@user.id}').setAttribute('class', ('trikot trikot_'+ (((this.checked == '1') && (this.id == 'user_female_false')) ? 'male' : 'female')))" } %>
+
+        <%= form.input :birthday,    :start_year => 1900, :as => :date, :order => [:day, :month, :year] %>
+        <%= form.input :plays_since, :start_year => 1900, :as => :date, :order => [:month, :year], :discard_day => true %>
+      </td>
+
+      <td width="50%">
+        <%= form.input :studivz,  :label => image_tag("studivz.ico"),  :hint => "Not working yet.", :input_html => { :disabled => true } %>
+        <%= form.input :myspace,  :label => image_tag("myspace.ico"),  :hint => "Fill in your myspace username." %>
+        <%= form.input :twitter,  :label => image_tag("twitter.ico"),  :hint => "Fill in your twitter username." %>
+        <%= form.input :facebook, :label => image_tag("facebook.ico"), :hint => "Fill in yor facebook username." %>
+        <%= form.input :flickr,   :label => image_tag("flickr.ico"),   :hint => "Fill in your flickr username." %>
+        <%= form.input :icq,      :label => image_tag("icq.ico"),      :hint => "Fill in your ICQ number." %>
+        <%= form.input :skype,    :label => image_tag("skype.ico"),    :hint => "Fill in your Skype name." %>
+
+            </td>
+
+    </tr>
+
+  </table>
+
+  <%= form.commit_button "Update" %>
+<% end %>
+
+<% form.inputs :name => "Avatar & Trikot" do %>
+  <table>
+    <tr>
+      <td width="50%">
+        <center>
+          <%= image_tag @user.avatar.url(:thumb) %>
+        </center>
+        <%= form.input :avatar, :input_html => { :size => 18 } %>
+      </td>
+      <td width="50%">
+        <center>
+          <%= render(:partial => "trikot", :locals     => { :user => @user, :color => @user.trikot_color }) %>
+        </center>
+        <%= form.input :trikot_color, 
+                       :input_html => { :class    => "color",
+                                        :onchange => "document.getElementById('trikot_#{@user.id}').style.backgroundColor = this.style.backgroundColor"} %>
+         
+        <%= form.input :number, :input_html => { :onkeyup => "document.getElementById('trikot_#{@user.id}_number').innerHTML = this.value" } %>
+
+      </td>
+    </tr>
+  </table>
+  <%= form.commit_button "Update" %>
 <% end %>
 
 
