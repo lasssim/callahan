@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   helper :all
   helper_method :current_user_session, :current_user
   helper_method :current_user_is_admin?
+  helper_method :get_gender_of
   filter_parameter_logging :password, :password_confirmation
   before_filter { |c| Authorization.current_user = c.current_user }
  
@@ -23,7 +24,10 @@ class ApplicationController < ActionController::Base
       return @current_user_session if defined?(@current_user_session)
       @current_user_session = UserSession.find
     end
-    
+
+    def get_gender_of(_user)
+      _user.female ? "female" : "male"
+    end
    
     def require_user
       unless current_user
