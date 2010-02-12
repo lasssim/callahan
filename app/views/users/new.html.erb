@@ -3,7 +3,7 @@
 <div class="boxcontent">
 
   <% semantic_form_for @user, :url => users_path do |f| %>
-    <%= render :partial => "form", :object => f, :locals => { :name => "Register" } %>
+    <%= render :partial => "registerform", :object => f, :locals => { :name => "Register" }  %>
   <% end %>
 
 </div>
