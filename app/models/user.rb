@@ -1,11 +1,21 @@
 class User < ActiveRecord::Base
   acts_as_authentic
 
-  has_and_belongs_to_many :roles
+#  has_and_belongs_to_many :roles
 
-	has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>", :tiny => "40x40>" }
+  has_many :roleuser_associations
+  has_many :roles, :through => :roleuser_associations
 
-#	using_access_control
+  has_attached_file :avatar, :styles => { :medium => { :geometry => "300x300>", :format => :png, :effect => "mirror" }, 
+                                          :thumb  => { :geometry => "120x120#", :format => :png, :effect => "mirror" },
+                                          :tiny   => { :geometry => "40x40#",   :format => :png, :effect => "none"   } 
+                                        },
+                             :processors => [:thumbnail, :effect]
+
+    
+  
+
+  #using_access_control
 
 
   
