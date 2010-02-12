@@ -42,41 +42,43 @@
         <div class="menu">
           <ul>
             <li><%= link_to "User List", users_path %></li>
-            <li><%= link_to "Role List", roles_path %></li>
           </ul>
         </div>
 
       </div>
     </div>
 
-<!--    <div class="span-4">
-      <div class="box">
-        <h3>Menu</h3>
-        <hr />
-        <div class="menu">
-          <ul>
-            <li><%= link_to "User List", users_path %></li>
-            <li><%= link_to "Role List", roles_path %></li>
-          </ul>
-        </div>
-      </div>
-    </div>
--->
- 
     <div class="span-20">
       <div class="box">
         <%= yield -%>
       </div>
     </div>
  
+
     <div class="span-4 last">
-      <div class="box">
+
+      <% if current_user_is_admin? %>
+        <div id="adminactions" class="box">
+          <div class="boxheader">Admin</div> 
+          <div class="boxcontent vmenu">
+            <ul>
+              <li><%= link_to "Role List", roles_path %></li>
+              <li><%= link_to "Authorization Rules", :controller => 'authorization_rules' if permitted_to? :read, :authorization_rules %></li>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+
+
+
+      <div id="sideline" class="box">
         <div class="boxheader">Sideline</div> 
         <div class="boxcontent">
           <%= display_standard_flashes -%>
           <%= pluralize User.logged_in.count, "user" %> currently logged in<br />
         </div>
       </div>
+      
     </div>
  
     <div class="span-24 last">
