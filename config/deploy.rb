@@ -12,6 +12,7 @@ set :deploy_via, :remote_cache
 set :use_sudo, false
 
 set :scm, "git"
+set :scm_verbose, true
 set :repository, "git@github.com:lister/callahan.git"
 set :branch, "master"
 
