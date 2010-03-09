@@ -1,5 +1,4 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -63,7 +62,9 @@
           <div class="boxcontent vmenu">
             <ul>
               <li><%= link_to "Role List", roles_path %></li>
-              <li><%= link_to "Authorization Rules", :controller => 'authorization_rules' if permitted_to? :read, :authorization_rules %></li>
+              <% if ::RAILS_ENV == 'development' %>
+                <li><%= link_to "Authorization Rules", :controller => 'authorization_rules' if permitted_to? :read, :authorization_rules %></li>
+              <% end %>
             </ul>
           </div>
         </div>
