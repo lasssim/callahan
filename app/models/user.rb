@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   acts_as_authentic
-
-#  has_and_belongs_to_many :roles
+  using_access_control
 
   has_many :roleuser_associations
   has_many :roles, :through => :roleuser_associations
@@ -11,13 +10,6 @@ class User < ActiveRecord::Base
                                           :tiny   => { :geometry => "40x40#",   :format => :png, :effect => "none"   } 
                                         },
                              :processors => [:thumbnail, :effect]
-
-    
-  
-
-  #using_access_control
-
-
   
   def deliver_password_reset_instructions!
     reset_perishable_token!

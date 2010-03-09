@@ -17,7 +17,8 @@ authorization do
   end  
 
   role :guest do  
-    has_permission_on :users,                 :to => :create
+    has_permission_on :users,                 :to => [:create, :update]
+    has_permission_on :user_sessions,         :to => :create
     has_permission_on :roleuser_associations, :to => :create
   end  
 end
