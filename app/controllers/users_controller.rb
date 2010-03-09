@@ -9,7 +9,8 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
-    @user.roles = Role.find(:all, :conditions => { :name => "user" })
+    @user.roles << Role.find_by_name("admin") if User.count == 0
+    @user.roles << Role.find_by_name("user")
     
     if @user.save
       flash[:notice] = "Account registered!"
@@ -17,6 +18,7 @@ class UsersController < ApplicationController
       redirect_back_or_default user_url(@user)
       #redirect_to user_url
     else
+      flash[:error] = "Account registration failed!"
       render :action => :new
     end
   end
