@@ -26,7 +26,17 @@ namespace :deploy do
   task :symlink_shared do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   end
-  
+
+  desc "Insert database seed."
+  task :seed do
+    run "cd #{current_path}; rake RAILS_ENV=production db:seed"
+  end
+ 
+  desc "Insert database seed."
+  task :gems do
+    run "cd #{current_path}; rake RAILS_ENV=production gems:install"
+  end
+ 
 end
 
 after 'deploy:update_code', 'deploy:symlink_shared'
