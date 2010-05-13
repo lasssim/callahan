@@ -74,5 +74,6 @@ Rails::Initializer.run do |config|
   #  :plays_since => "%B %Y"
   #)
 
-
+  config.gem 'tiny_mce'
+  config.gem 'gcal4ruby'
 end
