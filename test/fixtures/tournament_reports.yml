@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  team_id: 
+  creator: MyString
+  updated: 2010-03-26 18:54:06
+  created: 2010-03-26 18:54:06
+  body: MyText
+
+two:
+  title: MyString
+  team_id: 
+  creator: MyString
+  updated: 2010-03-26 18:54:06
+  created: 2010-03-26 18:54:06
+  body: MyText

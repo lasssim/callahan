@@ -1,0 +1,46 @@
+<div class="boxheader">Tournament Report List</div>
+
+<div class="boxcontent">
+
+<h1>Listing tournament_reports</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Team</th>
+    <th>Creator</th>
+    <th>Updated</th>
+    <th>Created</th>
+    <th>Body</th>
+  </tr>
+
+<% @tournament_reports.each do |tournament_report| %>
+  <tr>
+    <td><%=h tournament_report.title %></td>
+    <td><%=h tournament_report.team_id %></td>
+    <td><%=h tournament_report.creator %></td>
+    <td><%=h tournament_report.updated %></td>
+    <td><%=h tournament_report.created %></td>
+    <td><%=h tournament_report.body %></td>
+<td><% if permitted_to? :show, tournament_report %>
+              <%= link_to 'Show', tournament_report %>
+            <% end %>    
+</td>
+<td><% if permitted_to? :edit, tournament_report %>
+   <%= link_to 'Edit', edit_tournament_report_path(tournament_report) %>
+<% end %>
+</td>
+<td><% if permitted_to? :destroy, tournament_report %>
+   <%= link_to 'Destroy', tournament_report, :confirm => 'Are you sure?', :method => :delete %>
+<% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New tournament_report', new_tournament_report_path %>
+</div>
+
+<%= @calendar.to_iframe %>
+

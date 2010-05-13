@@ -1,0 +1,33 @@
+<p>
+  <b>Title:</b>
+  <%=h @tournament_report.title %>
+</p>
+
+<p>
+  <b>Team:</b>
+  <%=h @tournament_report.team_id %>
+</p>
+
+<p>
+  <b>Creator:</b>
+  <%=h @tournament_report.creator %>
+</p>
+
+<p>
+  <b>Updated:</b>
+  <%=h @tournament_report.updated %>
+</p>
+
+<p>
+  <b>Created:</b>
+  <%=h @tournament_report.created %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @tournament_report.body %>
+</p>
+
+
+<%= link_to 'Edit', edit_tournament_report_path(@tournament_report) %> |
+<%= link_to 'Back', tournament_reports_path %>
