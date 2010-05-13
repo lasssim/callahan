@@ -2,6 +2,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resources :roles
   map.resources :password_resets
+  map.resources :editor
+  map.resources :tournament_reports
   
   map.resource :user_session
   
