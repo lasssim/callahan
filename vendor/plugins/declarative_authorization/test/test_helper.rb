@@ -1,24 +1,38 @@
 require 'test/unit'
-RAILS_ROOT = File.join(File.dirname(__FILE__), %w{.. .. .. ..})
-require File.join(File.dirname(__FILE__), %w{.. lib declarative_authorization rails_legacy})
-require File.join(File.dirname(__FILE__), %w{.. lib declarative_authorization authorization})
-require File.join(File.dirname(__FILE__), %w{.. lib declarative_authorization in_controller})
-require File.join(File.dirname(__FILE__), %w{.. lib declarative_authorization maintenance})
+require 'pathname'
+
+unless defined?(RAILS_ROOT)
+  RAILS_ROOT = ENV['RAILS_ROOT'] ?
+      ENV['RAILS_ROOT'] + "" :
+      File.join(File.dirname(__FILE__), %w{.. .. .. ..})
+end
 
 unless defined?(ActiveRecord)
   if File.directory? RAILS_ROOT + '/config'
-    puts 'using config/boot.rb'
+    puts 'Using config/boot.rb'
     ENV['RAILS_ENV'] = 'test'
-    require File.join(RAILS_ROOT, 'config', 'boot.rb')
+    require File.join(RAILS_ROOT, 'config', 'environment.rb')
   else
     # simply use installed gems if available
-    puts 'using rubygems'
+    version_requirement = ENV['RAILS_VERSION'] ? "= #{ENV['RAILS_VERSION']}" : "> 2.1.0"
+    puts "Using Rails from RubyGems (#{version_requirement || "default"})"
     require 'rubygems'
-    gem 'actionpack'; gem 'activerecord'; gem 'activesupport'; gem 'rails'
+    %w{actionpack activerecord activesupport rails}.each do |gem_name|
+      gem gem_name, version_requirement
+    end
   end
 
-  %w(action_pack action_controller active_record active_support initializer).each {|f| require f}
+  unless defined?(Rails)  # needs to be explicit in Rails < 3
+    %w(action_pack action_controller active_record active_support initializer).each {|f| require f}
+  end
 end
+
+DA_ROOT = Pathname.new(File.expand_path("..", File.dirname(__FILE__)))
+
+require DA_ROOT + File.join(%w{lib declarative_authorization rails_legacy})
+require DA_ROOT + File.join(%w{lib declarative_authorization authorization})
+require DA_ROOT + File.join(%w{lib declarative_authorization in_controller})
+require DA_ROOT + File.join(%w{lib declarative_authorization maintenance})
 
 begin
   require 'ruby-debug'
@@ -99,11 +113,22 @@ class MocksController < ActionController::Base
   end
 end
 
-ActionController::Routing::Routes.draw do |map|
-  map.connect ':controller/:action/:id'
+if Rails.version < "3"
+  ActionController::Routing::Routes.draw do |map|
+    map.connect ':controller/:action/:id'
+  end
+else
+  Rails::Application.routes.draw do
+    match '/name/spaced_things(/:action)' => 'name/spaced_things'
+    match '/deep/name_spaced/things(/:action)' => 'deep/name_spaced/things'
+    match '/:controller(/:action(/:id))'
+  end
 end
+
 ActionController::Base.send :include, Authorization::AuthorizationInController
-require "action_controller/test_process"
+if Rails.version < "3"
+  require "action_controller/test_process"
+end
 
 class Test::Unit::TestCase
   include Authorization::TestHelper
@@ -117,5 +142,11 @@ class Test::Unit::TestCase
       @controller.instance_variable_set(var, nil)
     end
     get action, params
+  end
+
+  unless Rails.version < "3"
+    def setup
+      @routes = Rails::Application.routes
+    end
   end
 end

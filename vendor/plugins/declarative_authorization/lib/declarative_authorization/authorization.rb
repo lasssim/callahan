@@ -20,7 +20,7 @@ module Authorization
   # The exception is raised to ensure that the entire rule is invalidated.
   class NilAttributeValueError < AuthorizationError; end
   
-  AUTH_DSL_FILES = ["#{RAILS_ROOT}/config/authorization_rules.rb"] unless defined? AUTH_DSL_FILES
+  AUTH_DSL_FILES = [(Rails.root || Pathname.new('')).join("config", "authorization_rules.rb").to_s] unless defined? AUTH_DSL_FILES
   
   # Controller-independent method for retrieving the current user.
   # Needed for model security where the current controller is not available.
@@ -40,7 +40,7 @@ module Authorization
   end
 
   def self.activate_authorization_rules_browser? # :nodoc:
-    ::RAILS_ENV == 'development'
+    ::Rails.env.development?
   end
 
   @@dot_path = "dot"
@@ -57,7 +57,7 @@ module Authorization
   # a certain privilege is granted for the current user.
   #
   class Engine
-    attr_reader :roles, :role_titles, :role_descriptions, :privileges,
+    attr_reader :roles, :omnipotent_roles, :role_titles, :role_descriptions, :privileges,
       :privilege_hierarchy, :auth_rules, :role_hierarchy, :rev_priv_hierarchy,
       :rev_role_hierarchy
     
@@ -65,20 +65,14 @@ module Authorization
     # authorization configuration of +AUTH_DSL_FILES+.  If given, may be either
     # a Reader object or a path to a configuration file.
     def initialize (reader = nil)
-      if reader.nil?
-        begin
-          reader = Reader::DSLReader.load(AUTH_DSL_FILES)
-        rescue SystemCallError
-          reader = Reader::DSLReader.new
-        end
-      elsif reader.is_a?(String)
-        reader = Reader::DSLReader.load(reader)
-      end
+      reader = Reader::DSLReader.factory(reader || AUTH_DSL_FILES)
+
       @privileges = reader.privileges_reader.privileges
       # {priv => [[priv, ctx],...]}
       @privilege_hierarchy = reader.privileges_reader.privilege_hierarchy
       @auth_rules = reader.auth_rules_reader.auth_rules
       @roles = reader.auth_rules_reader.roles
+      @omnipotent_roles = reader.auth_rules_reader.omnipotent_roles
       @role_hierarchy = reader.auth_rules_reader.role_hierarchy
 
       @role_titles = reader.auth_rules_reader.role_titles
@@ -160,6 +154,8 @@ module Authorization
       
       user, roles, privileges = user_roles_privleges_from_options(privilege, options)
 
+      return true if roles.is_a?(Array) and not (roles & @omnipotent_roles).empty?
+
       # find a authorization rule that matches for at least one of the roles and 
       # at least one of the given privileges
       attr_validator = AttributeValidator.new(self, user, options[:object], privilege, options[:context])
@@ -233,6 +229,13 @@ module Authorization
     # Returns the role symbols of the given user.
     def roles_for (user)
       user ||= Authorization.current_user
+      if !user.respond_to?(:role_symbols) and !user.respond_to?(:roles)
+        debugger
+      else
+        @@test ||= Hash.new
+        @@test[user] ||= 0
+        @@test[user] += 1
+      end
       raise AuthorizationUsageError, "User object doesn't respond to roles (#{user.inspect})" \
         if !user.respond_to?(:role_symbols) and !user.respond_to?(:roles)
 
@@ -521,8 +524,9 @@ module Authorization
       begin
         object.send(attr)
       rescue ArgumentError, NoMethodError => e
-        raise AuthorizationUsageError, "Error when calling #{attr} on " +
-         "#{object.inspect} for validating attribute: #{e}"
+        raise AuthorizationUsageError, "Error occurred while validating attribute ##{attr} on #{object.inspect}: #{e}.\n" +
+          "Please check your authorization rules and ensure the attribute is correctly spelled and \n" +
+          "corresponds to a method on the model you are authorizing for."
       end
     end
 

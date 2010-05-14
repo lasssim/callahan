@@ -112,7 +112,7 @@ module Authorization
                   else
                     !DEFAULT_DENY
                   end
-      rescue AuthorizationError => e
+      rescue NotAuthorized => e
         auth_exception = e
       end
 
@@ -274,10 +274,7 @@ module Authorization
         context = options[:context]
         actions = args.flatten
 
-        # collect permits in controller array for use in one before_filter
-        unless filter_chain.any? {|filter| filter.method == :filter_access_filter}
-          before_filter :filter_access_filter
-        end
+        before_filter :filter_access_filter
         
         filter_access_permissions.each do |perm|
           perm.remove_actions(actions)

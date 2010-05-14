@@ -55,9 +55,9 @@ module Authorization
       def self.usages_by_controller
         # load each application controller
         begin
-          Dir.foreach(File.join(RAILS_ROOT, %w{app controllers})) do |entry|
+          Dir.foreach(File.join(::Rails.root, %w{app controllers})) do |entry|
             if entry =~ /^\w+_controller\.rb$/
-              require File.join(RAILS_ROOT, %w{app controllers}, entry)
+              require File.join(::Rails.root, %w{app controllers}, entry)
             end
           end
         rescue Errno::ENOENT
@@ -78,7 +78,7 @@ module Authorization
             end
           end
 
-          actions = controller.public_instance_methods(false) - controller.hidden_actions
+          actions = controller.public_instance_methods(false) - controller.hidden_actions.to_a
           memo[controller] = actions.inject({}) do |actions_memo, action|
             action_sym = action.to_sym
             actions_memo[action_sym] =
@@ -171,7 +171,7 @@ module Authorization
     
     def request_with (user, method, xhr, action, params = {}, 
         session = {}, flash = {})
-      session = session.merge({:user => user, :user_id => user.id})
+      session = session.merge({:user => user, :user_id => user && user.id})
       with_user(user) do
         if xhr
           xhr method, action, params, session, flash

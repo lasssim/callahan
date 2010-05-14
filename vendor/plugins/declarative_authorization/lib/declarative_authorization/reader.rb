@@ -35,6 +35,8 @@ module Authorization
   # * PrivilegesReader#includes
   #
   module Reader
+    # Signals that the specified file to load was not found.
+    class DSLFileNotFoundError < Exception; end
     # Signals errors that occur while reading and parsing an authorization DSL
     class DSLError < Exception; end
     # Signals errors in the syntax of an authorization DSL.
@@ -51,6 +53,19 @@ module Authorization
       def initialize ()
         @privileges_reader = PrivilegesReader.new
         @auth_rules_reader = AuthorizationRulesReader.new
+      end
+
+      # ensures you get back a DSLReader
+      # if you provide a:
+      #   DSLReader - you will get it back.
+      #   String or Array - it will treat it as if you have passed a path or an array of paths and attempt to load those.
+      def self.factory(obj)
+        case obj
+        when Reader::DSLReader
+          obj
+        when String, Array
+          load(obj)
+        end
       end
 
       # Parses a authorization DSL specification from the string given
@@ -71,7 +86,11 @@ module Authorization
         reader = new
         dsl_files = [dsl_files].flatten
         dsl_files.each do |file|
-          reader.parse(File.read(file), file) if File.exist?(file)
+          begin
+            reader.parse(File.read(file), file)
+          rescue SystemCallError
+            raise ::Authorization::Reader::DSLFileNotFoundError, "Error reading authorization rules file with path '#{file}'!  Please ensure it exists and that it is accessible."
+          end
         end
         reader
       end
@@ -148,12 +167,13 @@ module Authorization
 
     class AuthorizationRulesReader
       attr_reader :roles, :role_hierarchy, :auth_rules,
-        :role_descriptions, :role_titles # :nodoc:
+        :role_descriptions, :role_titles, :omnipotent_roles # :nodoc:
 
       def initialize # :nodoc:
         @current_role = nil
         @current_rule = nil
         @roles = []
+        @omnipotent_roles = []
         # higher_role => [lower_roles]
         @role_hierarchy = {}
         @role_titles = {}
@@ -248,7 +268,16 @@ module Authorization
           @current_rule = nil
         end
       end
-      
+
+      # Removes any permission checks for the current role.
+      #   role :admin
+      #     has_omnipotence
+      #   end
+      def has_omnipotence
+        raise DSLError, "has_omnipotence only allowed in role blocks" if @current_role.nil?
+        @omnipotent_roles << @current_role
+      end
+
       # Sets a description for the current role.  E.g.
       #   role :admin
       #     description "To be assigned to administrative personnel"
