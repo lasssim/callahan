@@ -7,6 +7,12 @@ div.box {
   background: white;
 }
 
+div#content {
+  border: 2px solid;
+  background: white;
+  min-height: 40em;
+}
+
 div.border {
   padding-right: 4px;
   margin-right:  5px;
@@ -98,7 +104,10 @@ div.menu li a {
   height: 2em;
   line-height: 2em;
   float: left;
-  width: 9em;
+  /*width: 9em;*/
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-right: 1em;
   display: block;
   border: 2px solid black;
   color: black;
