@@ -24,7 +24,7 @@
 
   <div class="container">
 
-    <div class="span-24 last prepend-top append-bottom">
+    <div class="prepend-4 span-24 append-4 prepend-top append-bottom">
       <div class="box">
         <%= image_tag "logo.png" %>
         <div class="right">
@@ -41,22 +41,24 @@
         <div class="menu">
           <ul>
             <li><%= link_to "User List", users_path %></li>
-	    <li><%= link_to "Tournament Reports", tournament_reports_path %></li>
+	          <li><%= link_to "Tournament Reports", tournament_reports_path %></li>
           </ul>
         </div>
 
       </div>
     </div>
 
-    <div class="span-20">
-      <div class="box">
-        <%= yield -%>
+    <div class="span-4">
+
+      <div id="submenu" class="box">
+        <div class="boxheader">Submenu</div> 
+        <div class="boxcontent vmenu">
+          <ul>
+            <li> <a href="http://fm4.orf.at">fm4</a></li>
+          </ul>
+        </div>
       </div>
-    </div>
  
-
-    <div class="span-4 last">
-
       <% if current_user_is_admin? %>
         <div id="adminactions" class="box">
           <div class="boxheader">Admin</div> 
@@ -72,7 +74,18 @@
       <% end %>
 
 
+     
+    </div>
+ 
 
+
+    <div class="span-24">
+      <div id="content" class="box">
+        <%= yield -%>
+      </div>
+    </div>
+ 
+    <div class="span-4 last">
       <div id="sideline" class="box">
         <div class="boxheader">Sideline</div> 
         <div class="boxcontent">
@@ -80,10 +93,10 @@
           <%= pluralize User.logged_in.count, "user" %> currently logged in<br />
         </div>
       </div>
-      
     </div>
  
-    <div class="span-24 last">
+
+    <div class="prepend-4 span-24 append-4 last">
       <div class="box">
         stuff
       </div>
