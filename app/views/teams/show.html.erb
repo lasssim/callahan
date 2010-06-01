@@ -1,0 +1,28 @@
+<p>
+  <b>Association:</b>
+  <%=h @team.association %>
+</p>
+
+<p>
+  <b>Owner:</b>
+  <%=h @team.owner %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @team.name %>
+</p>
+
+<p>
+  <b>Abbrevation:</b>
+  <%=h @team.abbrevation %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%=h @team.url %>
+</p>
+
+
+<%= link_to 'Edit', edit_team_path(@team) %> |
+<%= link_to 'Back', teams_path %>
