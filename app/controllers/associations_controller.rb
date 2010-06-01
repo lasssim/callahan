@@ -1,4 +1,6 @@
 class AssociationsController < ApplicationController
+  navigation :clubsteamsplayers_teams
+
   # GET /associations
   # GET /associations.xml
   def index
