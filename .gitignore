@@ -2,6 +2,7 @@
 config/initializers/action_mailer_settings.rb
 db/schema.rb
 config/database.yml
+config/gmaps_api_key.yml
 tmp/*
 log/*
 private/images/*
