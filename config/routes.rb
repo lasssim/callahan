@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :teams
+
+  map.resources :associations
+
   map.resources :users
   map.resources :roles
   map.resources :password_resets
@@ -7,6 +11,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resource :user_session
   
+
   #map.resource :account, :controller => "users"
   map.root :controller => "user_sessions", :action => "new"
 end
