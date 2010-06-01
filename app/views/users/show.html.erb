@@ -10,6 +10,7 @@
 <% end %>
 
 <div class="boxcontent">
+  <h1><%= @user.name %></h1>
   <table>
     <tr>
       <td colspan="2">
@@ -74,6 +75,14 @@
             <tr><td class="name">Current login ip </td> <td class="value"><%= @user.current_login_ip %> </td></tr>
         </table>
       </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <table class="horizontal">
+            <tr><td class="name">Owned Associations </td> <td class="value"><%= @user.ownedassociations.collect { |a| link_to a.name, a }.join(", ") %> </td></tr>
+        </table>
+      </td>
+
     </tr>
   </table>
 
