@@ -95,10 +95,12 @@ div.menu ul {
   padding: 0;
   margin: 0;
 } 
+
 div.menu li {
   float: left;
   margin: 0 0.15em;
-} 
+}
+
 div.menu li a {
   background: #dddddd bottom left repeat-x;
   height: 2em;
@@ -113,7 +115,11 @@ div.menu li a {
   color: black;
   text-decoration: none;
   text-align: center;
-} 
+}
+
+div.menu li a.selected {
+  background: #aabbcc bottom left repeat-x;
+}
 
 div.vmenu ul {
   list-style: none;
@@ -121,7 +127,6 @@ div.vmenu ul {
   margin: 0;
 } 
 div.vmenu li {
-  float: left;
   margin: 0 0.15em;
 } 
 
@@ -146,6 +151,7 @@ div.boxheader {
 
 div.boxcontent {
   margin-top: 2.6em;
+  margin-bottom:-1.6em;
   position: relative;
   top:-1.6em;
 
@@ -159,6 +165,13 @@ div.right {
 td {
   vertical-align: top;
 }
+
+td.club {
+  vertical-align: top;
+  background: #eeeeee;
+  padding-left: 3em;
+}
+
 
 div.trikot {
   margin-left: 1em;

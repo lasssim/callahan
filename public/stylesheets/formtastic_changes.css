@@ -60,6 +60,10 @@ form.formtastic fieldset ol li.numeric input {
   margin-left: 2%;
 }
 
+form.formtastic input, form.formtastic textarea, form.formtastic select {
+  color:black;
+}
+
 form.formtastic fieldset ol li p.inline-hints {
   color:#999999;
   margin:0 0 0.5em 27%;
