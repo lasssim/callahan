@@ -1,0 +1,10 @@
+%h1= @association.name
+
+- form.inputs :name => name do
+  = form.input :name
+  = form.input :abbrevation
+  = form.input :url, :label => image_tag("www.png")
+  = form.input :realm
+  = form.input :owner 
+  = form.input :parent, :collection => nested_set_options(Association) {|i| "#{'-' * i.level} #{i.name}" }, :include_blank => true
+  = form.commit_button

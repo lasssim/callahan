@@ -1,0 +1,27 @@
+= @map.to_html
+
+.boxheader Association Details  
+
+.boxcontent
+  %h1
+    = link_to @association.name, @association.url
+    = "(#{@association.abbrevation})" unless @association.abbrevation.empty?
+
+
+  %table.horizontal
+    %tr
+      %td.name   Owner
+      %td.value= link_to @association.owner.login, @association.owner
+
+    %tr
+      %td.name   Ancestors
+      %td.value= @association.ancestors.collect {|a| link_to a.name, a}.join(" -> ")
+
+    %tr
+      %td.name   Realm
+      %td.value= @association.realm
+
+  %center
+    = @map.div(:width => 600, :height => 400, :class => "box") 
+
+= link_to image_tag("edit.png"), edit_association_path(@association) |

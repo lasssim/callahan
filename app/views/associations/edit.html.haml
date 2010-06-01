@@ -1,0 +1,10 @@
+.boxheader Editing association
+
+.boxcontent
+
+  - semantic_form_for @association, :url => association_path do |f|
+    = render :partial => "form", :object => f, :locals => { :name => "Update"}
+
+      
+= link_to 'Show', @association
+

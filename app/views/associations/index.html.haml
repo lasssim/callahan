@@ -1,0 +1,37 @@
+
+= @map.to_html
+
+.boxheader Listing associations
+
+.boxcontent
+
+  %center
+    = @map.div(:width => "800", :height => 400, :class => "box") 
+
+
+  %table
+    %thead
+      %tr
+        %th Name
+        %th Realm
+        %th Actions
+
+    %tbody 
+    - Association.root.children.each do |association|
+      %tr
+        %td= link_to association.name, association
+        %td= h association.realm
+        %td
+          = link_to image_tag("edit.png"), edit_association_path(association) 
+          = link_to image_tag("delete.png"), association, :confirm => 'Are you sure?', :method => :delete
+        
+      - association.children.each do |club|
+        %tr
+          %td.club= link_to club.name, club
+          %td.club= h club.realm
+          %td.club
+            = link_to image_tag("edit.png"), edit_association_path(club) 
+            = link_to image_tag("delete.png"), club, :confirm => 'Are you sure?', :method => :delete
+  %br
+
+  = link_to 'New association', new_association_path

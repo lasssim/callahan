@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  parent: 
+  owner: 
+  name: MyString
+  abbrevation: MyString
+  url: MyString
+  realm: MyString
+
+two:
+  parent: 
+  owner: 
+  name: MyString
+  abbrevation: MyString
+  url: MyString
+  realm: MyString
