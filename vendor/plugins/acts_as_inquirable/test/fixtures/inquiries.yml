@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  inquirer: 
+  inquirer_type: MyString
+  inquiree: 
+  inquiree_type: MyString
+  inquiryitem: 
+  inquiryitem_type: MyString
+  message: MyString
+
+two:
+  inquirer: 
+  inquirer_type: MyString
+  inquiree: 
+  inquiree_type: MyString
+  inquiryitem: 
+  inquiryitem_type: MyString
+  message: MyString
