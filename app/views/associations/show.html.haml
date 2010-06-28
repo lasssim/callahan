@@ -19,7 +19,7 @@
 
     %tr
       %td.name   Realm
-      %td.value= @association.realm
+      %td.value= "#{@association.realm} (#{@association.realm})"
 
   %center
     = @map.div(:width => 600, :height => 400, :class => "box") 

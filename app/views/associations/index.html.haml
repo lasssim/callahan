@@ -6,7 +6,7 @@
 .boxcontent
 
   %center
-    = @map.div(:width => "800", :height => 400, :class => "box") 
+    = @map.div(:width => 800, :height => 600, :class => "box") 
 
 
   %table
@@ -18,20 +18,22 @@
 
     %tbody 
     - Association.root.children.each do |association|
-      %tr
-        %td= link_to association.name, association
+      %tr{:id => ["association", association.id] }
+        %td
+          = image_tag "flags/#{association.realm.downcase}.png"
+          = link_to association.name, association
         %td= h association.realm
         %td
-          = link_to image_tag("edit.png"), edit_association_path(association) 
-          = link_to image_tag("delete.png"), association, :confirm => 'Are you sure?', :method => :delete
+          = link_to        image_tag("edit.png"),   edit_association_path(association) 
+          = link_to_remote image_tag("delete.png"), :url => association_url(association), :confirm => 'Are you sure?', :method => :delete
         
       - association.children.each do |club|
-        %tr
+        %tr{:id => ["association", club.id] }
           %td.club= link_to club.name, club
           %td.club= h club.realm
           %td.club
             = link_to image_tag("edit.png"), edit_association_path(club) 
-            = link_to image_tag("delete.png"), club, :confirm => 'Are you sure?', :method => :delete
+            = link_to_remote image_tag("delete.png"), :url => association_url(club), :confirm => 'Are you sure?', :method => :delete
   %br
 
   = link_to 'New association', new_association_path
