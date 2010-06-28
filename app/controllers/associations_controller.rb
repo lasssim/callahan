@@ -1,4 +1,6 @@
 class AssociationsController < ApplicationController
+  
+  filter_resource_access
   navigation :clubsteamsplayers_teams
 
   # GET /associations
@@ -102,25 +104,25 @@ class AssociationsController < ApplicationController
   def destroy
     @association = Association.find(params[:id])
     @association.destroy
+    flash[:notice] = "Association was successfully deleted."
 
     respond_to do |format|
       format.html { redirect_to(associations_url) }
       format.xml  { head :ok }
+      format.js
     end
   end
 
   private
   def add_assoc_to_map(_assoc, _color="#0000ff")
-    cg = Geokit::Geocoders::GoogleGeocoder.do_reverse_geocode(_assoc.coords).country_code
-    unless cg.nil?
-      cg.downcase!
+    if _assoc.realm.size <= 3
       @map.icon_global_init(
-        GIcon.new(:image              => "/images/flags/#{cg}.png",
+        GIcon.new(:image              => "/images/flags/#{_assoc.realm.downcase}.png",
                   :icon_size          => GSize.new(16, 11),
                   :icon_anchor        => GPoint.new(8, 5),
                   :info_window_anchor => GPoint.new(8, 0)), 
-                  "#{cg}_icon")
-      assoc_icon = Variable.new("#{cg}_icon")    
+                  "#{_assoc.realm.downcase}_icon")
+      assoc_icon = Variable.new("#{_assoc.realm.downcase}_icon")    
       @map.overlay_init(GMarker.new(_assoc.coords, 
                                   :info_window => "<b>I'm a Popup window</b><br/>",
                                   :icon        => assoc_icon,
