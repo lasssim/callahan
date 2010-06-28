@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user,    :only => [:show, :edit, :update, :destroy]
   filter_resource_access
+  navigation :clubsteamsplayers_teams
   
   def new
     @user = User.new
@@ -24,6 +25,7 @@ class UsersController < ApplicationController
   end
   
   def show
+    store_location
     @user = get_user
   end
 
@@ -43,7 +45,10 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.find(:all, :order => "login")
+#@users = User.find(:all, :order => "login")
+
+    @users = User.find(:all, :conditions => ['login LIKE ?', "%#{params[:search]}%"])
+
   end
 
   def destroy
