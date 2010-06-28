@@ -1,0 +1,7 @@
+
+class Club < Association
+  
+
+end
+
+

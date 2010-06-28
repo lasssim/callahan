@@ -1,0 +1,12 @@
+<h1>Editing inquiry</h1>
+
+<% form_for(@inquiry) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @inquiry %> |
+<%= link_to 'Back', inquiries_path %>

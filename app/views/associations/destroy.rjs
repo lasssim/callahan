@@ -1,0 +1,3 @@
+page["association_#{@association.id}"].remove
+page.insert_html :top, :sideline_content, display_standard_flashes
+flash.discard

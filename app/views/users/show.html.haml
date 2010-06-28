@@ -1,0 +1,192 @@
+:javascript
+  $(function() {
+    $("#tabs").tabs();
+  });
+  $(function() {
+    $("#datepicker").datepicker();
+  });
+
+
+
+.boxheader
+  User details:
+  %b
+    = @user.login
+
+.right
+  = image_tag @user.avatar.url(:thumb), :class => "right"
+
+- unless @user.number.blank?
+  .right
+    = render :partial => "trikot", :locals => { :user => @user, :color => @user.trikot_color }
+
+
+.boxcontent
+  %h1= @user.name
+  = inquiry_actions(@user)
+  =# link_to "Add Friend", user_inquiries_path(@user, :inquiree_id => @user, :inquiree_type => "User", :inquiry_item_id => @user, :inquiry_item_type => "User", :inquiry_type => "friendship"), :method => :post  
+
+  #tabs
+    %ul
+      %li= link_to "Profile",   "#tabs-1"
+      %li= link_to "Messages",  "#tabs-2"
+      %li= link_to "Inquiries", "#tabs-3"
+    #tabs-1
+      %div
+        %table
+          %tr
+            %td{ :colspan => "2" }
+              %table.horizontal
+                
+                - unless @user.forename.blank? and @user.surname.blank?
+                  %tr
+                    %td.name Name
+                    %td.value
+                      = "#{@user.forename} #{@user.surname}"
+                      = image_tag "#{get_gender_of(current_user)}.gif"
+                
+                - unless @user.birthday.nil?
+                  %tr
+                    %td.name Birthday
+                    %td.value
+                      = @user.birthday.to_s(:birthday)
+                      %i
+                        (Age:
+                        = ((Date.today - @user.birthday) / 365).floor
+                        )
+                
+                - unless @user.plays_since.nil?
+                  %tr
+                    %td.name
+                      Plays since
+                    %td.value
+                      = @user.plays_since.to_s(:plays_since)
+                      %i
+                        (
+                        = ((Date.today - @user.plays_since) / 365).floor
+                        Years)
+                
+                - unless @user.hometown.blank?
+                  %tr
+                    %td.name
+                      Hometown
+                    %td.value
+                      = @user.hometown
+                
+                - unless @user.veggie.nil?
+                  %tr
+                    %td.name
+                      Veggie
+                    %td.value
+                      = @user.veggie ? "Yes" : "No"
+          
+          %tr
+            %td
+              %table.horizontal
+                %tr
+                  %td.name
+                    = image_tag "email.gif"
+                  %td.value
+                    = mail_to @user.email
+                
+                - unless @user.homepage.blank?
+                  %tr
+                    %td.name
+                      = image_tag "www.png"
+                    %td.value
+                      = link_to @user.homepage, @user.homepage
+                
+                - unless @user.facebook.blank?
+                  %tr
+                    %td.name
+                      = image_tag "facebook.ico"
+                    %td.value
+                      = link_to @user.facebook, "http://www.facebook.com/#{@user.facebook}"
+                
+                - unless @user.myspace.blank?
+                  %tr
+                    %td.name
+                      = image_tag "myspace.ico"
+                    %td.value
+                      = link_to @user.myspace,  "http://www.myspace.com/#{@user.myspace}"
+                
+                - unless @user.twitter.blank?
+                  %tr
+                    %td.name
+                      = image_tag "twitter.ico"
+                    %td.value
+                      = link_to @user.twitter,  "http://twitter.com/#{@user.twitter}"
+                
+                - unless @user.flickr.blank?
+                  %tr
+                    %td.name
+                      = image_tag "flickr.ico"
+                    %td.value
+                      = link_to @user.flickr,   "http://www.flickr.com/photos//#{@user.twitter}"
+                
+                - unless @user.icq.nil?
+                  %tr
+                    %td.name
+                      = image_tag "http://status.icq.com/online.gif?web=#{@user.icq}&img=5"
+                    %td.value
+                      = link_to @user.icq, "http://www.icq.com/people/#{@user.icq}"
+                
+                - unless @user.skype.blank?
+                  %tr
+                    %td.name
+                      = image_tag "http://mystatus.skype.com/smallicon/#{@user.skype}"
+                    %td.value
+                      = link_to @user.skype, "skype:simonlasselsberger?chat"
+            
+            %td
+              %table.horizontal
+                %tr
+                  %td.name
+                    Login count
+                  %td.value
+                    = @user.login_count
+                %tr
+                  %td.name
+                    Last request at
+                  %td.value
+                    = @user.last_request_at
+                %tr
+                  %td.name
+                    Last login at
+                  %td.value
+                    = @user.last_login_at
+                %tr
+                  %td.name
+                    Current login at
+                  %td.value
+                    = @user.current_login_at
+                %tr
+                  %td.name
+                    Last login ip
+                  %td.value
+                    = @user.last_login_ip
+                %tr
+                  %td.name
+                    Current login ip
+                  %td.value
+                    = @user.current_login_ip
+
+          %tr
+            %td{ :colspan => "2" }
+              %table.horizontal
+                %tr
+                  %td.name
+                    Owned Associations
+                  %td.value
+                    = @user.ownedassociations.collect { |a| link_to a.name, a }.join(", ")
+      = link_to 'Edit', edit_user_path
+
+    #tabs-2
+      - form_tag delete_selected_user_messages_path(@user) do
+        - if params[:mailbox] == "sent"
+          = render :partial => "messages/sent"
+        - else
+          = render :partial => "messages/inbox"
+
+    #tabs-3
+      %table.horizontal
