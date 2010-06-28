@@ -9,6 +9,11 @@ authorization do
     end
 
     has_permission_on :tournament_reports, :to => :read
+
+    has_permission_on :messages,     :to => :manage 
+    has_permission_on :associations, :to => :manage 
+    has_permission_on :teams,        :to => :manage
+    has_permission_on :inquiries,    :to => :manage
   end
 
   role :admin do  
@@ -17,6 +22,10 @@ authorization do
     has_permission_on :roles,                 :to => :manage 
     has_permission_on :authorization_rules,   :to => :read
     has_permission_on :tournament_reports,    :to => :manage
+    has_permission_on :messages,              :to => :manage 
+    has_permission_on :associations,          :to => :manage 
+    has_permission_on :teams,                 :to => :manage
+    has_permission_on :inquiries,             :to => :manage
   end  
 
   role :guest do  
