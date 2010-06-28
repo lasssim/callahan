@@ -29,7 +29,7 @@ MEMBERPART="index.php?page=list_members.php"
 wfdf = Association.find_or_create_by_name(:name        => "World Flying Disc Federation",
                                           :abbrevation => "WFDF",
                                           :url         => URLBASE,
-                                          :realm       => "wien", 
+                                          :realm       => "INT", 
                                           :owner_id    => 1)
 
 
@@ -43,13 +43,19 @@ doc.search("/html/body/table[2]/tr/td[2]/div[1]/table/tr").each do |row|
   else
     tmp = row.search("td")
     puts tmp[2].at("a").inner_html.strip
-    assoc = Association.find_or_create_by_name(:realm       => tmp[0].inner_html.strip,
-                                               :url         => "#{URLBASE}/#{tmp[1].at("a").attributes["href"]}",
-                                               :abbrevation => tmp[1].at("a").inner_html.strip,
-                                               :name        => tmp[2].at("a").inner_html.strip,
-                                               :owner_id    => 1).move_to_child_of(wfdf)
+    r = tmp[0].inner_html.strip
+    puts "----"
+    pp r
+    pp I18n.translate(:countries).select { |k, v| v == r }
+    next if I18n.translate(:countries).select { |k, v| v == r }.empty?
+    assoc = Association.find_or_create_by_name(:realm        => r == "International" ? "INT" : I18n.translate(:countries).select { |k, v| v == r }.first.first.to_s,
+                                               :url          => "#{URLBASE}/#{tmp[1].at("a").attributes["href"]}",
+                                               :abbrevation  => tmp[1].at("a").inner_html.strip,
+                                               :name         => tmp[2].at("a").inner_html.strip,
+                                               :owner_id     => 1)
+    assoc.move_to_child_of(wfdf)
 
-    if tmp[0].inner_html.strip == "Austria"
+    if r == "Austria"
       tdoc = Hpricot(open("http://www.frisbeeverband.at/index.php?id=2"))
       tdoc.search("/html/body/div[@id='wrapper']/div[@id='content_wrapper']/div[@id='maincontent']/table/*/*/table/*/*").each do |team|
         break if team.inner_html =~ /alt="Österreichische Golf Clubs"/
@@ -60,11 +66,12 @@ doc.search("/html/body/table[2]/tr/td[2]/div[1]/table/tr").each do |row|
           trealm =$1 if team.inner_html =~ /ort:\s([\w\s]*)/
           puts "  #{tname}"
         
-          tassoc = Association.find_or_create_by_name(:realm       => trealm,
-                                                      :url         => turl, 
-                                                      :abbrevation => "", 
-                                                      :name        => tname, 
-                                                      :owner_id    => 1).move_to_child_of(Association.find_by_realm("Austria"))
+          tassoc = Club.find_or_create_by_name(:realm       => trealm,
+                                               :url         => turl, 
+                                               :abbrevation => "", 
+                                               :name        => tname, 
+                                               :owner_id    => 1).move_to_child_of(Association.find_by_realm("AT"))
+          
         end
       
       end
