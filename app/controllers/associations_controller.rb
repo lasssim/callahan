@@ -1,6 +1,5 @@
 class AssociationsController < ApplicationController
   
-  filter_resource_access
   navigation :clubsteamsplayers_teams
 
   # GET /associations

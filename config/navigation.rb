@@ -37,7 +37,7 @@ SimpleNavigation::Configuration.run do |navigation|
       # Add an item to the sub navigation (same params again)
       sub.item :clubsteamsplayers_teams,   'Associations', associations_path
       sub.item :clubsteamsplayers_teams,   'Teams', teams_path
-      sub.item :clubsteamsplayers_players, 'Players', users_path
+      sub.item :clubsteamsplayers_players, 'Players', user_registration_path
     end 
   
     # You can also specify a condition-proc that needs to be fullfilled to display an item.

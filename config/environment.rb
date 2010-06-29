@@ -19,13 +19,11 @@ Rails::Initializer.run do |config|
   # Skip frameworks you're not going to use. To use Rails without a database
   # you must remove the Active Record framework.
   # config.frameworks -= [ :active_record, :active_resource, :action_mailer ]
-
   # Specify gems that this application depends on. 
   # They can then be installed with "rake gems:install" on new installations.
   # config.gem "bj"
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "aws-s3", :lib => "aws/s3"
-  config.gem "authlogic"
   config.gem "ruby_parser"
   config.gem "hpricot"
   config.gem 'tiny_mce'
@@ -33,10 +31,10 @@ Rails::Initializer.run do |config|
   config.gem "awesome_nested_set"
   config.gem "simple-navigation"
   config.gem "haml"
-  config.gem "declarative_authorization"
   config.gem "paperclip"
   config.gem "geokit"
   config.gem "formtastic" 
+  config.gem 'devise', '1.0.8'
 
 #  config.gem "simple-private-messages"
 

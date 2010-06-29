@@ -6,7 +6,6 @@
     <thead>
       <tr>
         <th>Pic</th>
-        <th>Login</th>
         <th>Email</th>
         <th>Roles</th>
         <th>Actions</th>
@@ -17,21 +16,20 @@
       <% @users.each do |user| %>
         <tr>
 					<td><%= image_tag user.avatar.url(:tiny) %></td>
-          <td><%=h user.login %></td>
           <td><%=h user.email %></td>
-          <td><%=h user.roles.collect {|r| r.name }.join(", ") %></td>
+          <td><%-#h user.roles.collect {|r| r.name }.join(", ") %></td>
           <td>
-            <% if permitted_to? :show, user %>
+            <%# if permitted_to? :show, user %>
               <%= link_to 'Show', user %>
-            <% end %>
+            <%# end %>
 
-            <% if permitted_to? :edit, user %>
+            <%# if permitted_to? :edit, user %>
               | <%= link_to 'Edit', edit_user_path(user) %>
-            <% end %>
+            <%# end %>
             
-            <% if permitted_to? :destroy, user %>
+            <%# if permitted_to? :destroy, user %>
               | <%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %>
-            <% end %>
+            <%# end %>
           </td>
         </tr>
       <% end %>

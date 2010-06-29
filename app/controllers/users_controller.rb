@@ -1,7 +1,4 @@
 class UsersController < ApplicationController
-  before_filter :require_no_user, :only => [:new, :create]
-  before_filter :require_user,    :only => [:show, :edit, :update, :destroy]
-  filter_resource_access
   navigation :clubsteamsplayers_teams
   
   def new
@@ -47,7 +44,7 @@ class UsersController < ApplicationController
   def index
 #@users = User.find(:all, :order => "login")
 
-    @users = User.find(:all, :conditions => ['login LIKE ?', "%#{params[:search]}%"])
+    @users = User.find(:all, :conditions => ['email LIKE ?', "%#{params[:search]}%"])
 
   end
 

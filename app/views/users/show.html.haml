@@ -11,7 +11,7 @@
 .boxheader
   User details:
   %b
-    = @user.login
+    = @user.email
 
 .right
   = image_tag @user.avatar.url(:thumb), :class => "right"
@@ -23,7 +23,7 @@
 
 .boxcontent
   %h1= @user.name
-  = inquiry_actions(@user)
+  -# inquiry_actions(@user)
   =# link_to "Add Friend", user_inquiries_path(@user, :inquiree_id => @user, :inquiree_type => "User", :inquiry_item_id => @user, :inquiry_item_type => "User", :inquiry_type => "friendship"), :method => :post  
 
   #tabs
@@ -144,32 +144,32 @@
                   %td.name
                     Login count
                   %td.value
-                    = @user.login_count
+                    = @user.sign_in_count
                 %tr
                   %td.name
                     Last request at
                   %td.value
-                    = @user.last_request_at
+                    = @user.updated_at
                 %tr
                   %td.name
                     Last login at
                   %td.value
-                    = @user.last_login_at
+                    = @user.last_sign_in_at
                 %tr
                   %td.name
                     Current login at
                   %td.value
-                    = @user.current_login_at
+                    = @user.current_sign_in_at
                 %tr
                   %td.name
                     Last login ip
                   %td.value
-                    = @user.last_login_ip
+                    = @user.last_sign_in_ip
                 %tr
                   %td.name
                     Current login ip
                   %td.value
-                    = @user.current_login_ip
+                    = @user.current_sign_in_ip
 
           %tr
             %td{ :colspan => "2" }
@@ -189,4 +189,3 @@
           = render :partial => "messages/inbox"
 
     #tabs-3
-      %table.horizontal

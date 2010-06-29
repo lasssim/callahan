@@ -1,5 +1,4 @@
 class TeamsController < ApplicationController
-  filter_resource_access
   navigation :clubsteamsplayers_teams
   # GET /teams
   # GET /teams.xml

@@ -1,9 +1,11 @@
 class User < ActiveRecord::Base
-  acts_as_authentic
-  using_access_control
+  # Include default devise modules. Others available are:
+  # :http_authenticatable, :token_authenticatable, :confirmable, :lockable, :timeoutable and :activatable
+  devise :registerable, :database_authenticatable, :recoverable, :confirmable,
+         :rememberable, :trackable, :validatable, :activatable
 
-  has_many :roleuser_associations
-  has_many :roles,                :through => :roleuser_associations
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation
 
   has_many :ownedassociations, :class_name => "Association", :foreign_key => "owner_id"
   has_many :ownedteams,        :class_name => "Team",        :foreign_key => "owner_id"
@@ -51,25 +53,11 @@ class User < ActiveRecord::Base
 
   end
 
-
-  def deliver_password_reset_instructions!
-    reset_perishable_token!
-    Notifier.deliver_password_reset_instructions(self)
-  end
-
-  def role_symbols  
-    roles.map do |role|  
-      role.name.underscore.to_sym  
-    end  
-  end  
-
-
   attr_reader :name
   def name
     str = ""
     str += "#{forename} " unless forename.nil? or forename.empty?
     str += surname        unless surname.nil?  or surname.empty?
-    str = login           if     str.empty?
     str
   end
 

@@ -1,20 +1,6 @@
 
 <%= javascript_include_tag "jscolor/jscolor" %>
 
-<% if permitted_to? :update, current_user.roleuser_associations %>
-  <% form.inputs :name => "Administrative Options" do %>
-    <table>
-      <tr>
-        <td width="50%">
-          <%= form.input :roles, :as => :check_boxes %>
-        </td>
-        <td width="50%">
-        </td>
-      </tr>
-    </table>
-    <%= form.commit_button "Update" %>
-  <% end %>
-<% end %>
 
 
 <% form.inputs :name => "Personal Details" do %>
@@ -22,7 +8,7 @@
     <tr>
       
       <td width="50%">
-        <%= form.input :login %>
+        <%-# form.input :login %>
         <%= form.input :email,    :label => image_tag("email.gif") %>
         <%= form.input :homepage, :label => image_tag("www.png") %>
         <%= form.input :forename %>

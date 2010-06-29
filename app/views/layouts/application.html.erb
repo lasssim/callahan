@@ -34,14 +34,14 @@
       <div class="box">
         <%= image_tag "logo.png" %>
         <div class="right">
-          <% if !current_user %>
-            <%= link_to "Register",        new_user_path %>           | 
-            <%= link_to "Log In",          new_user_session_path %>   |
-            <%= link_to "Forgot password", new_password_reset_path %>
+          <% if user_signed_in? %>
+            You are logged in as: <%= link_to current_user.email, current_user %> <br>
+            <%= link_to "My Account", current_user %> |
+            <%= link_to "Logout",     destroy_session_path(current_user), :method => :delete, :confirm => "Are you sure you want to logout?" %>
           <% else %>
-            You are logged in as: <%= link_to current_user.login, user_path(current_user) %> <br>
-            <%= link_to "My Account", user_path(current_user) %> |
-            <%= link_to "Logout",     user_session_path, :method => :delete, :confirm => "Are you sure you want to logout?" %>
+            <%= link_to "Register",        new_user_registration_path %> |
+            <%= link_to "Log In",          new_user_session_path %>      |
+            <%= link_to "Forgot password", new_user_password_path %>
           <% end %>
         </div>
         <div class="menu">
@@ -53,7 +53,7 @@
 
     <div class="span-4">
 
-      <% unless current_user %>
+      <% unless false %>
         <div id="loginprompt" class="box">
           <div class="boxheader">Please...</div> 
           <div class="boxcontent vmenu">
@@ -71,21 +71,6 @@
         </div>
       <% end %>
  
-      <% if current_user_is_admin? %>
-        <div id="adminactions" class="box">
-          <div class="boxheader">Admin Menu</div> 
-          <div class="boxcontent vmenu">
-            <ul>
-              <li><%= link_to "Role List", roles_path %></li>
-              <% if ::RAILS_ENV == 'development' %>
-                <li><%= link_to "Authorization Rules", :controller => 'authorization_rules' if permitted_to? :read, :authorization_rules %></li>
-              <% end %>
-            </ul>
-          </div>
-        </div>
-      <% end %>
-
-
      
     </div>
  
@@ -102,7 +87,7 @@
         <div id="sideline_header"  class="boxheader">Sideline</div> 
         <div id="sideline_content" class="boxcontent">
           <%= display_standard_flashes -%>
-          <%= pluralize User.logged_in.count, "user" %> currently logged in<br />
+          <%# pluralize User.logged_in.count, "user" %> currently logged in<br />
         </div>
       </div>
     </div>

@@ -1,6 +1,5 @@
 class TournamentReportsController < ApplicationController
  
- filter_resource_access
  
   uses_tiny_mce :options => {
                               :theme => 'advanced',

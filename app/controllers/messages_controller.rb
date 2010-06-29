@@ -1,6 +1,5 @@
 class MessagesController < ApplicationController
   
-  filter_resource_access
   before_filter :set_user
   
   def index
