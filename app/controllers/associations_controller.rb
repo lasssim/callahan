@@ -128,7 +128,7 @@ class AssociationsController < ApplicationController
                                   :title       => _assoc.name))
     else
       @map.overlay_init(GMarker.new(_assoc.coords, 
-                                    :info_window => "<b>I'm a Popup window</b><br/> #{Geokit::Geocoders::GoogleGeocoder.do_reverse_geocode(_assoc.coords).country_code}",
+                                    :info_window => "<b>I'm a Popup window</b>",
                                     :title       => _assoc.name)
                        )
     end
