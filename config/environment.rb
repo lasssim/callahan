@@ -84,4 +84,6 @@ Rails::Initializer.run do |config|
   #  :plays_since => "%B %Y"
   #)
 
+  config.time_zone = 'Vienna'
+
 end
