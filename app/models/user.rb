@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 
   has_many :ownedassociations, :class_name => "Association", :foreign_key => "owner_id"
   has_many :ownedteams,        :class_name => "Team",        :foreign_key => "owner_id"
+  has_many :ownedevents,       :class_name => "Event",       :foreign_key => "owner_id"
 
   #has_and_belongs_to_many :associations
   has_and_belongs_to_many :playedteams, :class_name => "Team", :join_table => "teams_players", :foreign_key => "player_id"
