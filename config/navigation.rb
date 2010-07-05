@@ -30,6 +30,7 @@ SimpleNavigation::Configuration.run do |navigation|
     #
     primary.item :tournaments, 'Tournaments', tournament_reports_path do |sub|
       sub.item :tournaments_reports , "Reports", tournament_reports_path
+      sub.item :calendar_root, "Calendar", calendar_root_path
     end
     
     # Add an item which has a sub navigation (same params, but with block)
