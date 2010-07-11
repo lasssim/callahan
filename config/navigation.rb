@@ -28,7 +28,7 @@ SimpleNavigation::Configuration.run do |navigation|
     # url - the address that the generated item links to. You can also use url_helpers (named routes, restful routes helper, url_for etc.)
     # options - can be used to specify attributes that will be included in the rendered navigation item (e.g. id, class etc.)
     #
-    primary.item :tournaments, 'Tournaments', tournament_reports_path do |sub|
+    primary.item :tournaments, 'Happy Birthday ;-)', tournament_reports_path do |sub|
       sub.item :tournaments_reports , "Reports", tournament_reports_path
       sub.item :calendar_root, "Calendar", calendar_root_path
     end
