@@ -1,5 +1,5 @@
 tinyMCE.addI18n('it.advhr_dlg',{
-width:"Larghezza",
-size:"Altezza",
+width:"Width",
+size:"Height",
 noshade:"Senza ombreggiatura"
 });

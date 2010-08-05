@@ -27,7 +27,7 @@
 		 * @param {string} url Absolute URL to where the plugin is located.
 		 */
 		init : function(ed) {
-			var t = this, lastRng;
+			var t = this;
 
 			t.editor = ed;
 
@@ -42,26 +42,13 @@
 
 			ed.onContextMenu.add(function(ed, e) {
 				if (!e.ctrlKey) {
-					// Restore the last selection since it was removed
-					if (lastRng)
-						ed.selection.setRng(lastRng);
-
 					t._getMenu(ed).showMenu(e.clientX, e.clientY);
 					Event.add(ed.getDoc(), 'click', hide);
 					Event.cancel(e);
 				}
 			});
 
-			function hide(ed, e) {
-				lastRng = null;
-
-				// Since the contextmenu event moves
-				// the selection we need to store it away
-				if (e && e.button == 2) {
-					lastRng = ed.selection.getRng();
-					return;
-				}
-
+			function hide() {
 				if (t._menu) {
 					t._menu.removeAll();
 					t._menu.destroy();

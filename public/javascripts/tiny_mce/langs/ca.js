@@ -90,9 +90,7 @@ desc:"Edita l\'estil CSS"
 paste:{
 paste_text_desc:"Enganxa com a text pla",
 paste_word_desc:"Enganxa des del Word",
-selectall_desc:"Selecciona-ho tot",
-plaintext_mode_sticky:"Enganxa est\u00E0 ara configurat en mode text pla. Clica de nou per tornar al mode normal d'enganxar. Despr\u00E9s d'enganxar quelcom ser\u00E0s retornat al mode normal d'enganxar.",
-plaintext_mode:"Enganxa est\u00E0 ara configurat en mode text pla. Clica de nou per tornar al mode normal d'enganxar."
+selectall_desc:"Selecciona-ho tot"
 },
 paste_dlg:{
 text_title:"Amb el teclat utilitzeu CTRL+V per a enganxar el text dins la finestra.",
@@ -122,9 +120,7 @@ col:"Columna",
 cell:"Cel\u00B7la"
 },
 autosave:{
-unload_msg:"Els canvis que heu fet es perdran si navegueu a fora d\'aquesta p\u00E0gina.",
-restore_content:"Restaura el contingut guardat autom\u00E0ticament.",
-warning_message:"Si restaures el contingut guardat, perdr\u00E0s tot el contingut actual de l'editor. Est\u00E0s segur de voler continuar?"
+unload_msg:"Els canvis que heu fet es perdran si navegueu a fora d\'aquesta p\u00E0gina."
 },
 fullscreen:{
 desc:"Commuta a mode de pantalla completa"
@@ -155,16 +151,4 @@ no_mpell:"No s\'ha trobat cap falta d\'ortografia."
 },
 pagebreak:{
 desc:"Insereix un salt de p\u00E0gina."
-},
-advlist:{
-types:"Tipus",
-def:"Per defecte",
-lower_alpha:"Lletres",
-lower_greek:"Lletres gregues (min\u00FAscules)",
-lower_roman:"Nombres romans (min\u00FAscules)",
-upper_alpha:"Lletres (maj\u00FAscules)",
-upper_roman:"Nombres romans (maj\u00FAscules)",
-circle:"Cercle",
-disc:"Disc",
-square:"Quadrat"
 }}});
