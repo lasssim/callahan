@@ -28,6 +28,7 @@ class AssociationsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @associations }
+      format.json  { render :json => @associations }
     end
   end
 
