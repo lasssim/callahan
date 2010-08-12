@@ -1,5 +1,5 @@
 class AssociationsController < ApplicationController
-  
+  load_and_authorize_resource 
   navigation :clubsteamsplayers_teams
 
   # GET /associations
